@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>BM Ops Tracker</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles.css">
+        <h1> BM Ops HQ A5 Tracker</h1>
+        <button id="loadButton"class="inputButton">Load (devTool)</button>
+        <button id="saveButton"class="inputButton">Save (devTool)</button>
+    </head>
+    <body>
+        <div id="container">
+            
+        </div>
+
+        <div class="modal" id="modal1">
+            <div class="modal-dialog">
+              <header id="modalHeader" class="modal-header">
+                <button id="closeModal" class="close-modal" aria-label="close modal" data-close>Close Pop-Up</button>
+              </header>
+              <section class="modal-cont"> <div class="modal-content">Title:</div>
+            <div class="modal-content" id="modalTitle"> placeholder value</div> </section> <br>
+            <section class="modal-cont"> <div class="modal-content">Start Date:</div>
+                <div class="modal-content" id="modalStartDate"> placeholder value</div> </section> <br>
+                <section class="modal-cont"> <div class="modal-content">End Date:</div>
+                    <div class="modal-content" id="modalEndDate"> placeholder value</div> </section> <br>
+                    <section class="modal-cont"> <div class="modal-content">Info:</div>
+                        <div class="modal-content" id="modalData"> placeholder value</div> </section> <br>
+                    <section class="modal-cont"> <div class="modal-content">Dependencies:</div>
+                        <div class="modal-content" id="modalDependencies"> placeholder value</div> </section> <br>
+                        <section class="modal-cont"> <div class="modal-content">Required for:</div>
+                            <div class="modal-content" id="modalRequiredFor"> placeholder value</div> </section> <br>
+                            <section ><div id="modal-dep-map" style="background-color:rgb(112, 3, 158);">Dependency Map
+                            <ul id="depsList">
+                              </div>
+                            </ul></section>
+              
+              
+              <footer id="modalFooter" class="modal-footer"></footer>
+            </div>
+          </div>
+
+          <button id="projButton"class="inputButton">Add Project</button>
+          <button id="axpButton"class="inputButton">Add AXP Event</button>
+          
+          <div id="inputContainer" style ="display: none;">
+        <h2> Project Input </h2>
+        <button id="closeProj" class="closeMenuButton" > Cancel New Project</button>
+        <br>
+        <label for="titleInput" class = "inputLabel"> Project Name </label>
+        <input id = "titleInput" name = "titleInput" class="inputField" type="text">
+        <br>
+        <label for="startInput" class = "inputLabel"> Start Date </label>   
+        <input id = "startInput" name = "startInput" class="inputField" type="Date">
+        <br>
+        <label  for="endInput" class = "inputLabel"> End Date </label>   
+        <input id = "endInput" name = "endInput" class="inputField" type="Date">
+        <br>
+        <label  for="dataInput" class = "inputLabel"> Project Info </label>   
+        <input id = "dataInput" name = "dataInput" class="inputField" type="text">
+        <br>
+        <label for="depInput" class = "inputLabel"> Dependencies</label>   
+        <select id = "depInput" name = "depInput" class="inputField">
+          
+        </select>
+        <button id="addDep" class="inputButton">Add Dependency</button>
+        <br>
+        <label for="reqForInput" class = "inputLabel"> Required For</label>   
+        <input id = "reqForInput" name = "reqForInput" class="inputField" type="text">
+        <button id="addDep" class="inputButton">Add Required For</button>
+        <br>
+        
+        <p> Choose Color</p>
+        <button class="colorButton" id="red" style="background-color:red"> Red </button>
+        <button class="colorButton" id="green" style="background-color:greenyellow"> Green </button>
+        <button class="colorButton" id="blue" style="background-color:cyan"> Blue </button> 
+        <br>
+        <button id="projSubButton"class="inputButton">Submit Project</button>
+        </div>
+
+        <div id="axpContainer" style ="display: none;">
+          
+          <h2> AXP Event Input </h2>          
+          <button id="closeAxp" class="closeMenuButton" > Cancel New Event</button>
+          <br>
+          <label for="axptitleInput" class = "inputLabel"> Event Name </label>
+          <input id = "axptitleInput" name = "axptitleInput" class="inputField" type="text">
+          <br>
+          <label for="axpstartInput" class = "inputLabel"> Start Date </label>   
+          <input id = "axpstartInput" name = "axpstartInput" class="inputField" type="Date">
+          <br>
+          <label  for="axpendInput" class = "inputLabel"> End Date </label>   
+          <input id = "axpendInput" name = "axpendInput" class="inputField" type="Date">
+          <br>
+          <label  for="axpdataInput" class = "inputLabel"> Event Info </label>   
+          <input id = "axpdataInput" name = "axpdataInput" class="inputField" type="text">
+          <br>
+        
+          <button id="axpSubButton"class="inputButton">Submit AXP Event</button>
+          </div>
+<div id="tacViewCont">
+  <button id="closeTac" class="closeMenuButton"> Close Tactical View</button>
+  <h2 class="monthHeader"> Month Events</h2>
+  
+  <div id="monthEntries">
+</div>
+<button id="openAddMonthEventMenu">Add New Event</button>
+</div>
+<!---This is a sub-menu triggered within the tacView menu-->
+<div id="newEventMenu">
+  <button id="closeNewEvent" class="closeMenuButton" > Cancel New Event</button>
+  <h2 class="monthHeader"> Add New Event</h2> 
+  <label for="titleInput" class = "inputLabel"> Event Title </label>
+        <input id = "tacTitleInput" name = "titleInput" class="inputField" type="text">
+        <br>
+        <label for="startInput" class = "inputLabel"> Start Date </label>   
+        <input id = "tacStartInput" name = "startInput" class="inputField" type="Date">
+        <br>
+        <label  for="endInput" class = "inputLabel"> End Date </label>   
+        <input id = "tacEndInput" name = "endInput" class="inputField" type="Date">
+        <br>
+        <label  for="dataInput" class = "inputLabel"> Recall Time </label>   
+        <input id = "recallInput" name = "dataInput" class="inputField" type="text">
+        <br>
+        <button id="newEventSubButton"class="inputButton" >Submit Event</button>
+</div> 
+        <script type="module" src="main.js" async defer></script>
+    </body>
+</html>
