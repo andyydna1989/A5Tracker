@@ -23,6 +23,7 @@ import {
 const axpEvents = [];
 const projects = [];
 const storage = window.localStorage;
+let selected = null;
 
 
 // dev tool in place of backend
@@ -139,9 +140,13 @@ function drawEntry(ganttEntry, isAxp) {
     entry.style.backgroundColor = ganttEntry.color;
     entry.classList.add("item");
     entry.setAttribute("data-open", "modal");
-    entry.onclick = function () {
+    entry.ondblclick = function () {
       loadItemModal(entry);
     };
+    entry.onclick = function (event) {
+      console.log(event.target);
+      selected = event.target;
+    }
     addClassAttributes(entry, ganttEntry, false);
     currentRow++;
   } else if (isAxp == true) {
@@ -200,3 +205,49 @@ function isRow1Free(entry){
 }
 else { return 2;}
 }
+
+window.addEventListener("keydown", function(event) {
+  if(selected !== null){
+
+  if(event.key == "ArrowUp" || event.key == "ArrowDown"){
+  event.preventDefault();
+  }
+  if(event.key=="ArrowUp" && selected.style.gridRowStart > 3){
+  selected.style.gridRowStart = processUpPress(selected.style.gridRowStart);
+  console.log(selected.style.gridRowStart);
+  
+  }
+  else if (event.key=="ArrowDown"){
+    selected.style.gridRowStart = processDownPress(selected.style.gridRowStart)
+    console.log(selected.style.gridRowStart);
+  }
+}
+})
+
+// styles return strings so a pair of converter functions
+function processUpPress(row){
+let a = parseInt(row);
+a -=1;
+return a.toString();
+}
+
+function processDownPress(row){
+  let counter =0;
+  let entries = document.getElementsByClassName("item");
+  let a = parseInt(row);
+
+for (let i=0; i<entries.length; i++){
+  if (entries[i].style.gridRowStart > counter){
+    counter = entries[i].style.gridRowStart;
+  }
+}
+
+if(a < counter){
+  a +=1;
+  return a.toString();
+}
+
+else {return row}
+  
+  }
+
