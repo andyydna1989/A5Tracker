@@ -100,8 +100,6 @@ const modalStartDate = document.getElementById("modalStartDate");
 const modalEndDate = document.getElementById("modalEndDate");
 const modalData = document.getElementById("modalData");
 const modalDependencies = document.getElementById("modalDependencies");
-modalDependencies.onclick = () =>
-  dependencyRelationshipCalc(modalTitle.innerHTML);
 const modalRequiredFor = document.getElementById("modalRequiredFor");
 
 closeModal.onclick = function () {
@@ -146,6 +144,7 @@ function drawEntry(ganttEntry, isAxp) {
     entry.onclick = function (event) {
       console.log(event.target);
       selected = event.target;
+      styleSelected();
     }
     addClassAttributes(entry, ganttEntry, false);
     currentRow++;
@@ -174,6 +173,7 @@ function loadItemModal(entry) {
   modalData.innerHTML = entry.getAttribute("data");
   modalDependencies.innerHTML = entry.getAttribute("dependencies");
   modalRequiredFor.innerHTML = entry.getAttribute("requiredFor");
+  dependencyRelationshipCalc(modalTitle.innerHTML);
 }
 
 //necessary to ensure the functionality and styling are correct on an entry.
@@ -226,9 +226,13 @@ window.addEventListener("keydown", function(event) {
 
 // styles return strings so a pair of converter functions
 function processUpPress(row){
+let entries = document.getElementsByClassName("item");
 let a = parseInt(row);
 a -=1;
-return a.toString();
+if(checkRowFree(selected, a, entries)){
+  return a.toString();
+}
+else {return row};
 }
 
 function processDownPress(row){
@@ -237,17 +241,58 @@ function processDownPress(row){
   let a = parseInt(row);
 
 for (let i=0; i<entries.length; i++){
-  if (entries[i].style.gridRowStart > counter){
+  if (entries[i].style.gridRowStart+1 > counter){
     counter = entries[i].style.gridRowStart;
   }
 }
 
 if(a < counter){
   a +=1;
+  if(checkRowFree(selected, a, entries)){
   return a.toString();
+  }
+  else {return row}
 }
 
 else {return row}
   
   }
 
+  // prevents overlap of projects
+function checkRowFree(item, newRow, itemsArray){
+let itemStart = (Date.parse(item.getAttribute("start")));
+let itemEnd = (Date.parse(item.getAttribute("end")));
+  let tester = 0;
+
+  for (let i=0; i<itemsArray.length; i++){
+  if (parseInt(itemsArray[i].style.gridRowStart) == newRow){
+    
+    let tempStart = (Date.parse(itemsArray[i].getAttribute("start")));
+    let tempEnd = (Date.parse(itemsArray[i].getAttribute("end")));
+
+    if(itemStart > tempEnd || itemEnd< tempStart){
+      console.log("No clash");
+      
+    }
+    else {tester++; console.log("Clash!")}
+  }
+}
+if (tester > 0){
+  return false;
+}
+else return true;
+}
+
+function styleSelected(){
+  
+  let entries = document.getElementsByClassName("item");
+  for (let i=0; i<entries.length; i++){
+    entries[i].style.borderColor = "";
+    entries[i].style.fontSize = "";
+  }
+  selected.style.borderColor = "blue";
+  selected.style.fontSize = "larger";
+  
+  
+
+}

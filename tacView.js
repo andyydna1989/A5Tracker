@@ -44,7 +44,9 @@ let currentSubject;
 
 export function loadTacView(subject) {
   currentSubject = subject;
-
+  console.log(subject);
+  const header = document.getElementById("monthHeader");
+  header.innerHTML = "Month Events " + currentSubject.innerHTML + " " + subject.getAttribute("year");
   // main tacview month display items
   const bigCont = document.getElementById("tacViewCont");
   const cont = document.getElementById("monthEntries");
@@ -151,6 +153,12 @@ function addNewEvent() {
         entries.push(x);
         const cont = document.getElementById("monthEntries");
         buildEntry(x, cont);
+        const newMenu = document.getElementById("newEventMenu");
+  newMenu.style.display = "none";
+  a.value = "";
+  b.value = "";
+  c.value = "";
+  d.value = "";
         
       } else if(endMonth>startMonth) {
         console.log("verified, but straddles month");
@@ -159,6 +167,12 @@ function addNewEvent() {
         entries.push(x);
         const cont = document.getElementById("monthEntries");
         buildEntry(x, cont);
+        const newMenu = document.getElementById("newEventMenu");
+  newMenu.style.display = "none";
+  a.value = "";
+  b.value = "";
+  c.value = "";
+  d.value = "";
         
       }
       else{

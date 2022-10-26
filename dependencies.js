@@ -69,9 +69,9 @@ if (subject){
             for (let i = 0; i<item.dependencies.length; i++){
                 for (let j=0; j < subDepsEntries.length; j++){
                     if (item.dependencies[i] == subDepsEntries[j].title){
-                        console.log("we got a match!" + item.dependencies[i]);
+                       
                         ignoreList.push(item.dependencies[i]);
-                        console.log("ignoring " + ignoreList);
+                      
                         
                     }
                 }

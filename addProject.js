@@ -72,7 +72,8 @@ export function submitProject() {
   const f = document.getElementById("reqForInput");
    
   //if (a.value && b.value && c.value){
-  console.log("validation successful");
+    if (Date.parse(b.value) < Date.parse(c.value)){
+  console.log("validation successful" + Date.parse(b.value) + " " + Date.parse(c.value));
   let proj = new Entry(
     a.value,
     calculateStartMonth(b.value),
@@ -93,8 +94,9 @@ export function submitProject() {
   f.value = "";
   dependencies = [];
   return proj;
-  // }
-}
+   }
+   else {window.alert("Your project ends before it starts, check your dates.")}
+  }
 
 export function submitAxpEvent(){
   const a = document.getElementById("axptitleInput");
@@ -102,6 +104,7 @@ export function submitAxpEvent(){
   const c = document.getElementById("axpendInput");
   const d = document.getElementById("axpdataInput");
 
+  
   let axp = new AxpEntry(
     a.value,
     calculateStartMonth(b.value),
@@ -117,7 +120,8 @@ export function submitAxpEvent(){
   c.value = "";
   d.value = "";
   return axp;
-}
+  }
+  
 
 function calculateStartMonth(start) {
   let a = start[5].toString();

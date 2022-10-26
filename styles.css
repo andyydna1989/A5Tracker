@@ -64,20 +64,32 @@ border-style: solid;
     border-radius: 5px;
   }
 
-  #item1{
-    grid-column-start: 1;
-    grid-column-end: 15;
-    grid-row-start: 2;
-    background-color: red;
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+  .month {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: black;
+  border-radius: 3px;
   }
 
-  #item2{
-    grid-column-start: 5;
-    grid-column-end: 36;
-    grid-row-start: 3;
-    background-color: blue;
+  .month:hover{
+    cursor:pointer;
   }
-
+ 
   .item{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-style: groove;
